@@ -33,7 +33,7 @@ def get_argparser() -> ArgumentParser:
     )
     ap.add_argument(
         "--slack_scale", type=int, required=False, default=None,
-        help="Scales the distributed slack quantities by 10^(SLACK_SCALE)",
+        help="Scales the distributed slack quantities by 10^(-SLACK_SCALE)",
     )
     ap.add_argument(
         "--marker_face_color", type=str, required=False, default="blue",
@@ -84,7 +84,7 @@ def summarize_results(
     dif_q = np.linalg.norm(raw['Qu'] - raw['Qu_snap'], ord=2, axis=1)
 
     FNAME = f"sum_{system}"
-    fig = plt.figure(figsize=(6.03, 7.5), dpi=100)
+    fig = plt.figure(figsize=(6.03, 7.7), dpi=100)
     gsp = fig.add_gridspec(nrows=3, ncols=1)
     axs_p = fig.add_subplot(gsp[0, 0])
     axs_q = fig.add_subplot(gsp[1, 0])
@@ -104,7 +104,11 @@ def summarize_results(
     axs_p.grid(visible=True, axis="y", which="both")
     axs_p.set_ylim(bottom=None, top=None)
     axs_p.set_ylabel(r"$\alpha \left(\mu\right)$ [p.u.]", fontsize=8)
-    axs_p.set_xticklabels([])
+    axs_p.set_xticks(
+        np.arange(raw['PUREGS'].shape[0]),
+        labels=[f"({p:.1E},\n {q:.1E})" for p, q in zip(raw['PUREGS'], raw['QUREGS'])],
+        fontsize=7,
+    )
     for l in axs_p.get_yaxis().get_ticklabels(): l.set_fontsize(7)
 
     # Reactive supply injections
@@ -121,7 +125,11 @@ def summarize_results(
     axs_q.grid(visible=True, axis="y", which="both")
     axs_q.set_ylim(bottom=None, top=None)
     axs_q.set_ylabel(r"$\beta \left(\mu\right)$ [p.u.]", fontsize=8)
-    axs_q.set_xticklabels([])
+    axs_q.set_xticks(
+        np.arange(raw['PUREGS'].shape[0]),
+        labels=[f"({p:.1E},\n {q:.1E})" for p, q in zip(raw['PUREGS'], raw['QUREGS'])],
+        fontsize=7,
+    )
     for l in axs_q.get_yaxis().get_ticklabels(): l.set_fontsize(7)
 
     # Distributed slack
@@ -160,7 +168,7 @@ def summarize_results(
     # Outro
     fig.align_ylabels(axs=[axs_p, axs_q, axs_s])
     fig.tight_layout()
-    fig.subplots_adjust(hspace=0.05)
+    fig.subplots_adjust(hspace=0.19)
     plt.savefig(f"./{FNAME}.pdf", dpi=600, bbox_inches="tight", pad_inches=0)
     print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
 
