@@ -133,17 +133,24 @@ def plot_summary(args : Namespace) -> plt.Figure:
     print(f"Summarizing results for {raw['SYS']}")
 
     FNAME = f"approx-sum_{raw['SYS']}"
-    fig = plt.figure(figsize=(6.015, 7.570), dpi=100)
+    fig = plt.figure(figsize=(6.015, 7.25), dpi=100)
     gsp = fig.add_gridspec(nrows=3, ncols=1)
     axs_s = fig.add_subplot(gsp[0, 0])
     axs_v = fig.add_subplot(gsp[1, 0])
     axs_a = fig.add_subplot(gsp[2, 0])
 
     # Distributed slacks
+    _ave = raw['apfSks'].mean()
+    _std = raw['apfSks'].std()
     yunit = r"$\times 10^{" + f"{args.slk_scale}" + r"}$ " if (
         args.slk_scale and (args.slk_scale != 0.)
     ) else ""
     with plt.style.context("seaborn-pastel"):
+        axs_s.axhline(
+            y=_ave,
+            linestyle="--", linewidth=1.0,
+            color="darkolivegreen",
+        )
         axs_s.plot(
             np.arange(1, raw['apfOks'].shape[0] + 1),
             raw['apfSks'],
@@ -159,12 +166,21 @@ def plot_summary(args : Namespace) -> plt.Figure:
     axs_s.set_xticklabels([])
     axs_s.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     for l in axs_s.get_yaxis().get_ticklabels(): l.set_fontsize(7)
+    print(f"{' ' * 3}Distributed slack [p.u.]: ", end="")
+    print(f"{_ave} ± {_std:E}")
 
     # Voltage deviation indices
+    _ave = raw['difVms'].mean()
+    _std = raw['difVms'].std()
     yunit = r"$\times 10^{" + f"{args.mag_scale}" + r"}$ " if (
         args.mag_scale and (args.mag_scale != 0.)
     ) else ""
     with plt.style.context("seaborn-pastel"):
+        axs_v.axhline(
+            y=_ave,
+            linestyle="--", linewidth=1.0,
+            color="sandybrown",
+        )
         axs_v.plot(
             np.arange(1, raw['apfOks'].shape[0] + 1),
             raw['difVms'],
@@ -180,12 +196,21 @@ def plot_summary(args : Namespace) -> plt.Figure:
     axs_v.set_xticklabels([])
     axs_v.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     for l in axs_v.get_yaxis().get_ticklabels(): l.set_fontsize(7)
+    print(f"{' ' * 3}Bus voltage magnitudes [p.u.]: ", end="")
+    print(f"{_ave} ± {_std:E}")
 
     # Differences in voltage-angle-difference profiles
+    _ave = raw['difVas'].mean()
+    _std = raw['difVas'].std()
     yunit = r"$\times 10^{" + f"{args.ang_scale}" + r"}$ " if (
         args.ang_scale and (args.ang_scale != 0.)
     ) else ""
     with plt.style.context("seaborn-pastel"):
+        axs_a.axhline(
+            y=_ave,
+            linestyle="--", linewidth=1.0,
+            color="mediumpurple",
+        )
         axs_a.plot(
             np.arange(1, raw['apfOks'].shape[0] + 1),
             raw['difVas'],
@@ -202,6 +227,8 @@ def plot_summary(args : Namespace) -> plt.Figure:
     axs_a.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     for l in axs_a.get_xaxis().get_ticklabels(): l.set_fontsize(7)
     for l in axs_a.get_yaxis().get_ticklabels(): l.set_fontsize(7)
+    print(f"{' ' * 3}Branch voltage phase angle differences [degrees]: ", end="")
+    print(f"{np.rad2deg(_ave)} ± {np.rad2deg(_std):E}")
 
     # Outro
     fig.align_ylabels(axs=[axs_s, axs_v, axs_a])
