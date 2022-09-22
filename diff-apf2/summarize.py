@@ -102,7 +102,7 @@ def plot_dPs(
     pscale, qscale = pscale or 0., qscale or 0.
 
     FNAME = f"diff-dPs_{raw['SYS']}"
-    fig = plt.figure(figsize=(6.01, 4.70), dpi=100)
+    fig = plt.figure(figsize=(6.01, 6.30), dpi=100)
     gsp = fig.add_gridspec(nrows=2, ncols=1)
     axs_p = fig.add_subplot(gsp[0, 0])
     axs_q = fig.add_subplot(gsp[1, 0])
@@ -186,7 +186,7 @@ def plot_dF(
     pscale, qscale = pscale or 0., qscale or 0.
 
     FNAME = f"diff-dF_{raw['SYS']}"
-    fig = plt.figure(figsize=(6.01, 4.70), dpi=100)
+    fig = plt.figure(figsize=(6.01, 6.30), dpi=100)
     gsp = fig.add_gridspec(nrows=2, ncols=1)
     axs_p = fig.add_subplot(gsp[0, 0])
     axs_q = fig.add_subplot(gsp[1, 0])
