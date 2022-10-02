@@ -1,8 +1,9 @@
-# *Anticipatory Power Flow: Demonstrations and Applications*
+# *Demonstrations and Applications*
 
 This repository houses the code files for
 Chapter 4 (*Demonstrations and Applications*)
-of my master's thesis (*Anticipatory Power Flow*).
+of my master's thesis
+(*A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power Systems Analysis*).
 The complete repository
 (which includes the manuscript and the data files)
 will be made available at
@@ -70,7 +71,7 @@ Please use (also available in [`CITATION.bib`](./CITATION.bib)):
   author      = {Christian Y. {Cahig}},
   date        = {2022},
   institution = {Department of Electrical Engineering and Technology},
-  title       = {{A}nticipatory {P}ower {F}low},
+  title       = {A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power Systems Analysis},
   doi         = {10.5281/zenodo.7077324},
   address     = {Iligan, Philippines},
   school      = {Mindanao State University - Iligan Institute of Technology},
