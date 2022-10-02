@@ -5,7 +5,7 @@ function [phi, J] = evalAPFEqns(x, e, Y, ref_bus, va_ref, ps_ratio, N_b)
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %
-%   This file is part of Anticipatory Power Flow, and is covered by the CC-BY-4.0 License.
+%   This file is part of a repository under the CC-BY-4.0 License.
 %   See `LICENSE` file in the source directory for details.
 
 %% Bus voltage phase angles
