@@ -8,7 +8,7 @@ function [out] = runAugmDCOPF(pdata, NameVals)
 %   ---------------------
 %   This function requires MATPOWER. It has been developed and tested on version 7.1.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 % 

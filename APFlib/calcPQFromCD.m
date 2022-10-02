@@ -8,7 +8,7 @@ function [p, q] = calcPQFromCD(Cu, Cd, pu, qu, pd, qd)
 %
 %   Please refer to Section 2.2.1 of the manuscript.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

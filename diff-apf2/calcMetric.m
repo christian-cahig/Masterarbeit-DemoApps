@@ -4,7 +4,7 @@ function [out] = calcMetric(pdata, Vm, Va, Ps, NameVals)
 %
 %   Please refer to Section 4.4.1 of the manuscript for more details.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 % 

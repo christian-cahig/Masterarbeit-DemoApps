@@ -16,7 +16,7 @@ function [lin, num] = getLines(mpc, NameVals)
 %   2. 'Transmission lines' and 'cables' are defined here as branches whose corresponding column-9
 %      entries in the branch data matrix, `mpc.branch`, are zero.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

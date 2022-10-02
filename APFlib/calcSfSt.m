@@ -13,7 +13,7 @@ function [sf, st] = calcSfSt(vm, va, Yf, Yt, fbus, tbus)
 %   format and indexing, please refer to Appendix B and Section 9.4.
 %   2. This is a tweaked version of MATPOWER's `opf_branch_flow_fcn` function.
 % 
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

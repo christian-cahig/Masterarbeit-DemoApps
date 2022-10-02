@@ -15,7 +15,7 @@ function [out] = solveAPFEqns(pdata, confg, NameVals)
 %   version 9.0. In particular, this is a thin wrapper around `fsolve`. For more details, see
 %   https://www.mathworks.com/help/releases/R2021b/optim/ug/fsolve.html.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

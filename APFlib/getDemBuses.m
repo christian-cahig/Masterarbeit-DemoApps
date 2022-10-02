@@ -16,7 +16,7 @@ function [dem_buses, N_d] = getDemBuses(mpc)
 %      assumed to cater one demand unit. Hence, the number of demand buses is taken to be the
 %      number of demand units as well.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

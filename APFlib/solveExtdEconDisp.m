@@ -11,7 +11,7 @@ function [out] = solveExtdEconDisp(pdata, NameVals)
 %   The accompanying User's Guide is freely available at
 %   http://web.cvxr.com/cvx/doc/CVX.pdf.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 % 

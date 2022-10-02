@@ -18,7 +18,7 @@ function [Y, Yf, Yt] = makeY(mpc)
 %      format and indexing, please refer to Appendix B and Section 9.4 of the User's Manual.
 %   2. This is a minor modification of MATPOWER's `makeYbus` (Section 9.5.6 of the User's Manual).
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

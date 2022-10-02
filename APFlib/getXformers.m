@@ -13,7 +13,7 @@ function [xfm, num] = getXformers(mpc)
 %   2. A '(power) transformer' is defined here as a branch whose corresponding column-9 entry of
 %      the branch data matrix, `mpc.branch`, is nonzero.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

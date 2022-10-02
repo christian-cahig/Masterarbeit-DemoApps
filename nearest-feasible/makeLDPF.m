@@ -18,7 +18,7 @@ function [C1, C2, C3, C4] = makeLDPF(Y, ref_bus)
 %   [C] = MAKELDPF(...)
 %   returns either [C1, C2; C3, C4] or [C1r, C2r; C3r, C4].
 % 
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %

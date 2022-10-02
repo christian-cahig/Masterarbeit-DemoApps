@@ -9,7 +9,7 @@ function mustBeEqualSize(a, b)
 %   "Function Argument Validation". The article, part of the MATLAB documentation, is available at
 %   https://www.mathworks.com/help/matlab/matlab_prog/function-argument-validation-1.html.
 %
-%   Anticipatory Power Flow
+%   A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power System Analysis
 %   Copyright (C) 2022 - present, Christian Cahig
 %   https://doi.org/10.5281/zenodo.7077324
 %
