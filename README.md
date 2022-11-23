@@ -7,7 +7,7 @@ of my master's thesis
 The complete repository
 (which includes the manuscript and the data files)
 will be made available at
-[`https://doi.org/10.5281/zenodo.7077324`](https://doi.org/10.5281/zenodo.7077324).
+[`https://doi.org/10.5281/zenodo.7180586`](https://doi.org/10.5281/zenodo.7180586).
 
 <!-- omit in toc -->
 ## Contents
@@ -50,7 +50,7 @@ All experiments and examples are implemented as MATLAB scripts (*i.e.*, `*.m` fi
 Snapshot data and raw results are available as `.mat` files
 but **are not** included in this repository due to their size;
 they can be accessed through the complete repository at
-[`https://doi.org/10.5281/zenodo.7077324`](https://doi.org/10.5281/zenodo.7077324).
+[`https://doi.org/10.5281/zenodo.7180586`](https://doi.org/10.5281/zenodo.7180586).
 
 Processing of results (*e.g.*, producing the plots used in the manuscript)
 are implemented as Python scripts.
