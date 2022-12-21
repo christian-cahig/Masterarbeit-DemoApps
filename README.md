@@ -6,7 +6,7 @@ of my master's thesis
 (*A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power Systems Analysis*).
 The complete repository
 (which includes the manuscript and the data files)
-will be made available at
+is available at
 [`https://doi.org/10.5281/zenodo.7180586`](https://doi.org/10.5281/zenodo.7180586).
 
 <!-- omit in toc -->
@@ -35,24 +35,29 @@ To "install" `APFlib`,
 Code files are organized as follows.
 
 - Those pertaining to Section 4.1.1 (*Solving the extended economic dispatch subproblem*)
-  are in `time-apf1/`.
-- Those pertaining to Section 4.1.2 (*Solving the APF equations*) are in `time-apf2/`.
+  are in [`time-apf1/`](./time-apf1/).
+- Those pertaining to Section 4.1.2 (*Solving the APF equations*)
+  are in [`time-apf2/`](./time-apf2/).
 - Those pertaining to Section 4.2 (*Effects of the supply regularization strengths*)
-  are in `xed-regs/`.
-- Those pertaining to Section 4.3.1 (*Providing warm-start points*) are in `warm-start/`.
+  are in [`xed-regs/`](./xed-regs/).
+- Those pertaining to Section 4.3.1 (*Providing warm-start points*)
+  are in [`warm-start/`](./warm-start/).
 - Those pertaining to Section 4.3.2 (*Finding the nearest power-flow feasible point*)
-  are in `nearest-feasible/`.
+  are in [`nearest-feasible/`](./nearest-feasible/).
 - Those pertaining to Section 4.4 (*Differentiating through the APF equations*)
-  are in `diff-apf2/`.
-- Those pertaining to Appendix B.2 (*The snapshot data sets*) are in `snapshots/`.
+  are in [`diff-apf2/`](./diff-apf2/).
+- Those peratining to Section 4.5 (*Probabilistic analysis*)
+  are in [`prob-analysis/`](./prob-analysis/).
+- Those pertaining to Appendix B.2 (*The snapshot data sets*)
+  are in [`snapshots/`](./snapshots/).
 
 All experiments and examples are implemented as MATLAB scripts (*i.e.*, `*.m` files).
 Snapshot data and raw results are available as `.mat` files
 but **are not** included in this repository due to their size;
-they can be accessed through the complete repository at
+they can be downloaded from the versioned repository at
 [`https://doi.org/10.5281/zenodo.7180586`](https://doi.org/10.5281/zenodo.7180586).
 
-Processing of results (*e.g.*, producing the plots used in the manuscript)
+The processing of results (*e.g.*, producing the plots used in the manuscript)
 are implemented as Python scripts.
 To run these processing scripts,
 instantiate a [Conda](https://docs.conda.io/projects/conda/en/latest/) environment
