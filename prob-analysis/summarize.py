@@ -119,6 +119,7 @@ def summarize_supply_injections(
     num_bins : int | str = "auto",
     xed_type : str = XED_TYPES[0],
 ) -> plt.Figure:
+    """Plot the distributions of total active and total supply injections"""
     xed_type = xed_type.lower()
     assert xed_type in XED_TYPES
 
