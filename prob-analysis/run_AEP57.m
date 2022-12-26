@@ -67,9 +67,13 @@ while ~bdata.success
         BScaleRange=[BC_MUL_MIN; BC_MUL_MAX], ...
         assertOPFOk=false);
 end
+[FBUSES, TBUSES] = deal(bdata.branch(:, 1), bdata.branch(:, 2));
 
 %% Base problem data
 pdata = buildProbData(sdata, bdata, calcCft=true, calcCu=true, calcCd=true);
+[Cf, Ct] = deal(pdata.Cf, pdata.Ct);
+Cft = Cf - Ct;
+clear Cf Ct;
 
 %% For anticipating supply injections
 SUPREG = 1.0;
@@ -133,7 +137,7 @@ parfor i = 1:NUM_SAMPLES
     if ~ddata.success, continue; end
 
     % Problem data
-    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCft=true, calcCu=true, calcY=true);
+    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCu=true, calcY=true);
 
     % APF essentials
     [Ph, Qh] = calcPhQh(pdata.dispatch, Vm=pdata.snapshot.bus(:, 8));
@@ -178,7 +182,7 @@ parfor i = 1:NUM_SAMPLES
     uuPus(i, :) = xed.Pu;
     uuQus(i, :) = xed.Qu;
     uuVms(i, :) = vol.Vm;
-    uuVas(i, :) = (pdata.Cf - pdata.Ct) * vol.Va;
+    uuVas(i, :) = Cft * vol.Va;
     uuPs(i, :) = vol.Ps;
 end
 clear ddata pdata;
@@ -195,7 +199,7 @@ parfor i = 1:NUM_SAMPLES
     if ~ddata.success, continue; end
 
     % Problem data
-    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCft=true, calcCu=true, calcY=true);
+    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCu=true, calcY=true);
 
     % APF essentials
     [Ph, Qh] = calcPhQh(pdata.dispatch, Vm=pdata.snapshot.bus(:, 8));
@@ -240,7 +244,7 @@ parfor i = 1:NUM_SAMPLES
     urPus(i, :) = xed.Pu;
     urQus(i, :) = xed.Qu;
     urVms(i, :) = vol.Vm;
-    urVas(i, :) = (pdata.Cf - pdata.Ct) * vol.Va;
+    urVas(i, :) = Cft * vol.Va;
     urPs(i, :) = vol.Ps;
 end
 clear ddata pdata;
@@ -257,7 +261,7 @@ parfor i = 1:NUM_SAMPLES
     if ~ddata.success, continue; end
 
     % Problem data
-    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCft=true, calcCu=true, calcY=true);
+    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCu=true, calcY=true);
 
     % APF essentials
     [Ph, Qh] = calcPhQh(pdata.dispatch, Vm=pdata.snapshot.bus(:, 8));
@@ -302,7 +306,7 @@ parfor i = 1:NUM_SAMPLES
     ruPus(i, :) = xed.Pu;
     ruQus(i, :) = xed.Qu;
     ruVms(i, :) = vol.Vm;
-    ruVas(i, :) = (pdata.Cf - pdata.Ct) * vol.Va;
+    ruVas(i, :) = Cft * vol.Va;
     ruPs(i, :) = vol.Ps;
 end
 clear ddata pdata;
@@ -319,7 +323,7 @@ parfor i = 1:NUM_SAMPLES
     if ~ddata.success, continue; end
 
     % Problem data
-    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCft=true, calcCu=true, calcY=true);
+    pdata = buildProbData(sdata, ddata, RefAngle=REFANG, calcCu=true, calcY=true);
 
     % APF essentials
     [Ph, Qh] = calcPhQh(pdata.dispatch, Vm=pdata.snapshot.bus(:, 8));
@@ -364,7 +368,7 @@ parfor i = 1:NUM_SAMPLES
     rrPus(i, :) = xed.Pu;
     rrQus(i, :) = xed.Qu;
     rrVms(i, :) = vol.Vm;
-    rrVas(i, :) = (pdata.Cf - pdata.Ct) * vol.Va;
+    rrVas(i, :) = Cft * vol.Va;
     rrPs(i, :) = vol.Ps;
 end
 clear ddata pdata;
@@ -378,7 +382,7 @@ save(sprintf("./%s.mat", fname), ...
     "RS_MUL_MIN", "RS_MUL_MAX", ...
     "XS_MUL_MIN", "XS_MUL_MAX", ...
     "BC_MUL_MIN", "BC_MUL_MAX", ...
-    "BASEMVA", ...
+    "FBUSES", "TBUSES", "BASEMVA", ...
     "SUPREG", "REFANG", "EPSTOL", "NITERS", "NEVALS", ...
     "TRFALG", "LMDAMP", "LMDIAG", ...
     "meanPds", "meanQds", ...
