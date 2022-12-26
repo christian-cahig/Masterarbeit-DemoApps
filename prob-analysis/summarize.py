@@ -68,7 +68,7 @@ def summarize_demand_draws(
     raw : RawResults,
     num_bins : int | str = "auto",
 ) -> plt.Figure:
-    """Plot the distributions of total active and total demand draws"""
+    """Plot the distributions of the total active and of the total demand draws"""
     FNAME = f"PdQd_{raw['SNAPSHOT_ID']}"
     fig = plt.figure(figsize=(5.99, 7.0), dpi=100)
     gsp = fig.add_gridspec(nrows=2, ncols=1)
@@ -119,7 +119,7 @@ def summarize_supply_injections(
     num_bins : int | str = "auto",
     xed_type : str = XED_TYPES[0],
 ) -> plt.Figure:
-    """Plot the distributions of total active and total supply injections"""
+    """Plot the distributions of the total active and of the total supply injections"""
     xed_type = xed_type.lower()
     assert xed_type in XED_TYPES
 
@@ -168,11 +168,55 @@ def summarize_supply_injections(
     print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
     return fig
 
+def summarize_distributed_slack(
+    raw : RawResults,
+    num_bins : int | str = "auto",
+    xed_type : str = XED_TYPES[0],
+) -> plt.Figure:
+    """Plot the distribution of the distributed slack variable"""
+    xed_type = xed_type.lower()
+    assert xed_type in XED_TYPES
+
+    FNAME = f"Ps-{xed_type}_{raw['SNAPSHOT_ID']}"
+    fig = plt.figure(figsize=(5.99, 3.5), dpi=100)
+    gsp = fig.add_gridspec(nrows=1, ncols=1)
+    axs = fig.add_subplot(gsp[0, 0])
+
+    # Distributed slack
+    with plt.style.context("seaborn-pastel"):
+        histplot(
+            x=raw[f"{xed_type}Ps"], kde=True, bins=num_bins, color="dodgerblue", fill=False,
+            line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
+            ax=axs,
+        )
+    axs.axvline(
+        raw[f"{xed_type}Ps"].mean(),
+        color="dodgerblue", linestyle="--", linewidth=1.7,
+        label="Mean"
+    )
+    axs.grid(visible=True, axis="y", which="major")
+    axs.set_xlabel("Anticipated distributed slack [p.u.]", fontsize=8)
+    axs.set_ylabel("Count", fontsize=8)
+    for l in axs.get_xaxis().get_ticklabels(): l.set_fontsize(7)
+    for l in axs.get_yaxis().get_ticklabels(): l.set_fontsize(7)
+    axs.legend(loc="upper right", fontsize=8, shadow=True)
+
+    # Outro
+    fig.tight_layout()
+    plt.savefig(f"./{FNAME}.pdf", dpi=600, bbox_inches="tight", pad_inches=0)
+    print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
+    return fig
+
 if __name__ == "__main__":
     args = get_argparser().parse_args()
     raw = get_raw_results(system=args.system, drop_infeasible=True)
     summarize_demand_draws(raw, num_bins=args.num_bins if args.num_bins else "auto")
     for xed_type in XED_TYPES: summarize_supply_injections(
+        raw,
+        num_bins=args.num_bins if args.num_bins else "auto",
+        xed_type=xed_type
+    )
+    for xed_type in XED_TYPES: summarize_distributed_slack(
         raw,
         num_bins=args.num_bins if args.num_bins else "auto",
         xed_type=xed_type
