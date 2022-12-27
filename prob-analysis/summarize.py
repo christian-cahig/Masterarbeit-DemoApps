@@ -207,6 +207,73 @@ def summarize_distributed_slack(
     print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
     return fig
 
+def summarize_voltage_mags(
+    raw : RawResults,
+    num_bins : int | str = "auto",
+    xed_type : str = XED_TYPES[0],
+) -> plt.Figure:
+    """Plot the distribution of the bus voltage magnitudes"""
+    xed_type = xed_type.lower()
+    assert xed_type in XED_TYPES
+
+    x0 = raw[f"{xed_type}Vms"].mean(axis=0)
+    idx1, idx2 = x0.argmin(), x0.argmax()
+
+    FNAME = f"Vm-{xed_type}_{raw['SNAPSHOT_ID']}"
+    fig = plt.figure(figsize=(5.99, 10), dpi=100)
+    gsp = fig.add_gridspec(nrows=3, ncols=1)
+    axs0 = fig.add_subplot(gsp[0, 0])
+    axs1 = fig.add_subplot(gsp[1, 0])
+    axs2 = fig.add_subplot(gsp[2, 0])
+
+    # Over all buses
+    x0 = raw[f"{xed_type}Vms"].flatten()
+    with plt.style.context("seaborn-pastel"):
+        histplot(
+            x=x0, kde=True, bins=num_bins, color="seagreen", fill=False,
+            line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
+            ax=axs0,
+        )
+    axs0.set_xlabel("Anticipated bus-voltage magnitude [p.u.]", fontsize=8)
+
+    # Over the bus with the least average voltage magnitude
+    x1 = raw[f"{xed_type}Vms"][:, idx1]
+    with plt.style.context("seaborn-pastel"):
+        histplot(
+            x=x1, kde=True, bins=num_bins, color="seagreen", fill=False,
+            line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
+            ax=axs1,
+        )
+    axs1.set_xlabel(f"Anticipated voltage magnitude [p.u.] at bus {idx1+1}", fontsize=8)
+
+    # Over the bus with the largest average voltage magnitude
+    x2 = raw[f"{xed_type}Vms"][:, idx2]
+    with plt.style.context("seaborn-pastel"):
+        histplot(
+            x=x2, kde=True, bins=num_bins, color="seagreen", fill=False,
+            line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
+            ax=axs2,
+        )
+    axs2.set_xlabel(f"Anticipated voltage magnitude [p.u.] at bus {idx2+1}", fontsize=8)
+
+    # Visuals
+    for axs, x, in zip([axs0, axs1, axs2], [x0, x1, x2]):
+        axs.axvline(x.mean(), color="seagreen", linestyle="--", linewidth=1.7, label="Mean")
+        axs.grid(visible=True, axis="y", which="major")
+        axs.set_xlim(left=0.87, right=1.13)
+        axs.set_ylabel("Count", fontsize=8)
+        for l in axs.get_xaxis().get_ticklabels(): l.set_fontsize(7)
+        for l in axs.get_yaxis().get_ticklabels(): l.set_fontsize(7)
+        axs.legend(loc="upper right", fontsize=8, shadow=True)
+
+    # Outro
+    fig.align_ylabels(axs=[axs0, axs1, axs2])
+    fig.tight_layout()
+    fig.subplots_adjust(hspace=0.17)
+    plt.savefig(f"./{FNAME}.pdf", dpi=600, bbox_inches="tight", pad_inches=0)
+    print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
+    return fig
+
 if __name__ == "__main__":
     args = get_argparser().parse_args()
     raw = get_raw_results(system=args.system, drop_infeasible=True)
