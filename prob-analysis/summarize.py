@@ -79,11 +79,11 @@ def summarize_demand_draws(
     x = raw['meanPds'].sum() * raw['multPds']
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x, kde=True, bins=num_bins, color="dodgerblue", fill=False,
+            x=x, kde=True, bins=num_bins, color="lightcoral", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs_p,
         )
-    axs_p.axvline(x.mean(), color="dodgerblue", linestyle="--", linewidth=1.7, label="Mean")
+    axs_p.axvline(x.mean(), color="lightcoral", linestyle="--", linewidth=1.7, label="Mean")
     axs_p.grid(visible=True, axis="y", which="major")
     axs_p.set_xlabel("Expected total active demand draw [p.u]", fontsize=8)
     axs_p.set_ylabel("Count", fontsize=8)
@@ -95,11 +95,11 @@ def summarize_demand_draws(
     x = raw['meanQds'].sum() * raw['multQds']
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x, kde=True, bins=num_bins, color="forestgreen", fill=False,
+            x=x, kde=True, bins=num_bins, color="sienna", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs_q,
         )
-    axs_q.axvline(x.mean(), color="forestgreen", linestyle="--", linewidth=1.7, label="Mean")
+    axs_q.axvline(x.mean(), color="sienna", linestyle="--", linewidth=1.7, label="Mean")
     axs_q.grid(visible=True, axis="y", which="major")
     axs_q.set_xlabel("Expected total reactive demand draw [p.u.]", fontsize=8)
     axs_q.set_ylabel("Count", fontsize=8)
