@@ -185,13 +185,13 @@ def summarize_distributed_slack(
     # Distributed slack
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=raw[f"{xed_type}Ps"], kde=True, bins=num_bins, color="dodgerblue", fill=False,
+            x=raw[f"{xed_type}Ps"], kde=True, bins=num_bins, color="teal", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs,
         )
     axs.axvline(
         raw[f"{xed_type}Ps"].mean(),
-        color="dodgerblue", linestyle="--", linewidth=1.7,
+        color="teal", linestyle="--", linewidth=1.7,
         label="Mean"
     )
     axs.grid(visible=True, axis="y", which="major")
