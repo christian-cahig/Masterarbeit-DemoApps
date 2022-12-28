@@ -221,7 +221,7 @@ def summarize_voltage_mags(
     idx1, idx2 = x0.argmin(), x0.argmax()
 
     FNAME = f"Vm-{xed_type}_{raw['SNAPSHOT_ID']}"
-    fig = plt.figure(figsize=(5.99, 10), dpi=100)
+    fig = plt.figure(figsize=(5.99, 8.0), dpi=100)
     gsp = fig.add_gridspec(nrows=3, ncols=1)
     axs0 = fig.add_subplot(gsp[0, 0])
     axs1 = fig.add_subplot(gsp[1, 0])
@@ -270,7 +270,7 @@ def summarize_voltage_mags(
     # Outro
     fig.align_ylabels(axs=[axs0, axs1, axs2])
     fig.tight_layout()
-    fig.subplots_adjust(hspace=0.17)
+    fig.subplots_adjust(hspace=0.20)
     plt.savefig(f"./{FNAME}.pdf", dpi=600, bbox_inches="tight", pad_inches=0)
     print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
     return fig
@@ -288,7 +288,7 @@ def summarize_voltage_angs(
     idx1, idx2 = x0.argmin(), x0.argmax()
 
     FNAME = f"Va-{xed_type}_{raw['SNAPSHOT_ID']}"
-    fig = plt.figure(figsize=(5.99, 10), dpi=100)
+    fig = plt.figure(figsize=(5.99, 8.0), dpi=100)
     gsp = fig.add_gridspec(nrows=3, ncols=1)
     axs0 = fig.add_subplot(gsp[0, 0])
     axs1 = fig.add_subplot(gsp[1, 0])
@@ -346,7 +346,7 @@ def summarize_voltage_angs(
     # Outro
     fig.align_ylabels(axs=[axs0, axs1, axs2])
     fig.tight_layout()
-    fig.subplots_adjust(hspace=0.17)
+    fig.subplots_adjust(hspace=0.20)
     plt.savefig(f"./{FNAME}.pdf", dpi=600, bbox_inches="tight", pad_inches=0)
     print(f"{' ' * 3}Plots saved to '{FNAME}.pdf'")
     return fig
