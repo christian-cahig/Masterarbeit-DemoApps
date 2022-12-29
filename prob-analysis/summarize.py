@@ -299,7 +299,7 @@ def summarize_voltage_angs(
     x0 = va.flatten()
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x0, kde=True, bins=num_bins, color="cornflowerblue", fill=False,
+            x=x0, kde=True, bins=num_bins, color="slateblue", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs0,
         )
@@ -310,7 +310,7 @@ def summarize_voltage_angs(
     x1 = va[:, idx1]
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x1, kde=True, bins=num_bins, color="cornflowerblue", fill=False,
+            x=x1, kde=True, bins=num_bins, color="slateblue", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs1,
         )
@@ -324,7 +324,7 @@ def summarize_voltage_angs(
     x2 = va[:, idx2]
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x2, kde=True, bins=num_bins, color="cornflowerblue", fill=False,
+            x=x2, kde=True, bins=num_bins, color="slateblue", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs2,
         )
@@ -336,7 +336,7 @@ def summarize_voltage_angs(
 
     # Visuals
     for axs, x, in zip([axs0, axs1, axs2], [x0, x1, x2]):
-        axs.axvline(x.mean(), color="cornflowerblue", linestyle="--", linewidth=1.7, label="Mean")
+        axs.axvline(x.mean(), color="slateblue", linestyle="--", linewidth=1.7, label="Mean")
         axs.grid(visible=True, axis="y", which="major")
         axs.set_xlim(left=None, right=None)
         axs.set_ylabel("Count", fontsize=8)
