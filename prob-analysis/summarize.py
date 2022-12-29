@@ -284,7 +284,8 @@ def summarize_voltage_angs(
     xed_type = xed_type.lower()
     assert xed_type in XED_TYPES
 
-    x0 = raw[f"{xed_type}Vas"].mean(axis=0)
+    va = np.rad2deg(raw[f"{xed_type}Vas"])
+    x0 = va.mean(axis=0)
     idx1, idx2 = x0.argmin(), x0.argmax()
 
     FNAME = f"Va-{xed_type}_{raw['SNAPSHOT_ID']}"
@@ -295,18 +296,18 @@ def summarize_voltage_angs(
     axs2 = fig.add_subplot(gsp[2, 0])
 
     # Over all branches
-    x0 = raw[f"{xed_type}Vas"].flatten()
+    x0 = va.flatten()
     with plt.style.context("seaborn-pastel"):
         histplot(
             x=x0, kde=True, bins=num_bins, color="cornflowerblue", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs0,
         )
-    axs0.set_xlim(left=-0.067, right=0.137)
+    axs0.set_xlim(left=-4, right=8.1)
     axs0.set_xlabel("Anticipated branch-phase-angle differences [°]", fontsize=8)
 
     # Over the branch with the least average voltage-phase-angle difference
-    x1 = raw[f"{xed_type}Vas"][:, idx1]
+    x1 = va[:, idx1]
     with plt.style.context("seaborn-pastel"):
         histplot(
             x=x1, kde=True, bins=num_bins, color="cornflowerblue", fill=False,
@@ -320,7 +321,7 @@ def summarize_voltage_angs(
     )
 
     # Over the branch with the largest average voltage-phase-angle difference
-    x2 = raw[f"{xed_type}Vas"][:, idx2]
+    x2 = va[:, idx2]
     with plt.style.context("seaborn-pastel"):
         histplot(
             x=x2, kde=True, bins=num_bins, color="cornflowerblue", fill=False,
@@ -451,49 +452,53 @@ if __name__ == "__main__":
     print("Averages over all branch-phase-angle differences")
     for xed_type in XED_TYPES: print(
         f"{' '*3}{xed_type}",
-        raw[f"{xed_type}Vas"].flatten().mean(),
+        np.rad2deg(raw[f"{xed_type}Vas"].flatten().mean()),
         sep=": "
     )
     print("Standard deviations over all branch-phase-angle differences")
     for xed_type in XED_TYPES: print(
         f"{' '*3}{xed_type}",
-        raw[f"{xed_type}Vas"].flatten().std(),
+        np.rad2deg(raw[f"{xed_type}Vas"].flatten().std()),
         sep=": "
     )
     print("Averages over branch with least average phase-angle difference")
     for xed_type in XED_TYPES:
-        x = raw[f"{xed_type}Vas"].mean(axis=0)
+        va = np.rad2deg(raw[f"{xed_type}Vas"])
+        x = va.mean(axis=0)
         idx = x.argmin()
         print(
             f"{' '*3}{xed_type} @ ({raw['FBUSES'][idx]} -> {raw['TBUSES'][idx]})",
-            raw[f"{xed_type}Vas"][:, idx].mean(),
+            va[:, idx].mean(),
             sep=": "
         )
     print(f"Standard deviations over branch with least average phase-angle difference")
     for xed_type in XED_TYPES:
-        x = raw[f"{xed_type}Vas"].mean(axis=0)
+        va = np.rad2deg(raw[f"{xed_type}Vas"])
+        x = va.mean(axis=0)
         idx = x.argmin()
         print(
             f"{' '*3}{xed_type} @ ({raw['FBUSES'][idx]} -> {raw['TBUSES'][idx]})",
-            raw[f"{xed_type}Vas"][:, idx].std(),
+            va[:, idx].std(),
             sep=": "
         )
     print("Averages over branch with largest average phase-angle difference")
     for xed_type in XED_TYPES:
-        x = raw[f"{xed_type}Vas"].mean(axis=0)
+        va = np.rad2deg(raw[f"{xed_type}Vas"])
+        x = va.mean(axis=0)
         idx = x.argmax()
         print(
             f"{' '*3}{xed_type} @ ({raw['FBUSES'][idx]} -> {raw['TBUSES'][idx]})",
-            raw[f"{xed_type}Vas"][:, idx].mean(),
+            va[:, idx].mean(),
             sep=": "
         )
     print(f"Standard deviations over branch with largest average phase-angle difference")
     for xed_type in XED_TYPES:
-        x = raw[f"{xed_type}Vas"].mean(axis=0)
+        va = np.rad2deg(raw[f"{xed_type}Vas"])
+        x = va.mean(axis=0)
         idx = x.argmax()
         print(
             f"{' '*3}{xed_type} @ ({raw['FBUSES'][idx]} -> {raw['TBUSES'][idx]})",
-            raw[f"{xed_type}Vas"][:, idx].std(),
+            va[:, idx].std(),
             sep=": "
         )
     for t in XED_TYPES: summarize_voltage_angs(raw, num_bins=n, xed_type=t)
