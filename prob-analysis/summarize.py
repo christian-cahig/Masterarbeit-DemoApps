@@ -231,7 +231,7 @@ def summarize_voltage_mags(
     x0 = raw[f"{xed_type}Vms"].flatten()
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x0, kde=True, bins=num_bins, color="seagreen", fill=False,
+            x=x0, kde=True, bins=num_bins, color="olive", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs0,
         )
@@ -241,7 +241,7 @@ def summarize_voltage_mags(
     x1 = raw[f"{xed_type}Vms"][:, idx1]
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x1, kde=True, bins=num_bins, color="seagreen", fill=False,
+            x=x1, kde=True, bins=num_bins, color="olive", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs1,
         )
@@ -251,7 +251,7 @@ def summarize_voltage_mags(
     x2 = raw[f"{xed_type}Vms"][:, idx2]
     with plt.style.context("seaborn-pastel"):
         histplot(
-            x=x2, kde=True, bins=num_bins, color="seagreen", fill=False,
+            x=x2, kde=True, bins=num_bins, color="olive", fill=False,
             line_kws={"linestyle" : "-.", "linewidth" : 1.0, "label" : "KDE"},
             ax=axs2,
         )
@@ -259,7 +259,7 @@ def summarize_voltage_mags(
 
     # Visuals
     for axs, x, in zip([axs0, axs1, axs2], [x0, x1, x2]):
-        axs.axvline(x.mean(), color="seagreen", linestyle="--", linewidth=1.7, label="Mean")
+        axs.axvline(x.mean(), color="olive", linestyle="--", linewidth=1.7, label="Mean")
         axs.grid(visible=True, axis="y", which="major")
         axs.set_xlim(left=0.87, right=1.13)
         axs.set_ylabel("Count", fontsize=8)
