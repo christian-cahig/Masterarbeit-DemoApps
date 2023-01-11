@@ -7,7 +7,7 @@ of my master's thesis
 The complete repository
 (which includes the manuscript and the data files)
 is available at
-[`https://doi.org/10.5281/zenodo.7491508`](https://doi.org/10.5281/zenodo.7491508).
+[`https://doi.org/10.5281/zenodo.7523544`](https://doi.org/10.5281/zenodo.7523544).
 
 <!-- omit in toc -->
 ## Contents
@@ -55,7 +55,7 @@ All experiments and examples are implemented as MATLAB scripts (*i.e.*, `*.m` fi
 Snapshot data and raw results are available as `.mat` files
 but **are not** included in this repository due to their size;
 they can be downloaded from the versioned repository at
-[`https://doi.org/10.5281/zenodo.7491508`](https://doi.org/10.5281/zenodo.7491508).
+[`https://doi.org/10.5281/zenodo.7523544`](https://doi.org/10.5281/zenodo.7523544).
 
 The processing of results (*e.g.*, producing the plots used in the manuscript)
 are implemented as Python scripts.
@@ -77,7 +77,7 @@ Please use (also available in [`CITATION.bib`](./CITATION.bib)):
   date        = {2022},
   institution = {Mindanao State University - Iligan Institute of Technology},
   title       = {A Computational Approach to Anticipating Supply Injections and Bus Voltages in Steady-State Power Systems Analysis},
-  doi         = {10.5281/zenodo.7491508},
+  doi         = {10.5281/zenodo.7523544},
   address     = {Iligan, Philippines},
 }
 ```
